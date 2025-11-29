@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2C4L4K1/63qg/u+O0c/lU4o8l8g/J+o/t+z/o/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+        /* The new animated background layer */
+        .tech-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0d0f17; /* Dark background */
+            background-image: linear-gradient(0deg, rgba(252, 211, 77, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(252, 211, 77, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: move-background 100s linear infinite;
+            z-index: -1;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        @keyframes move-background {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 10000px 10000px;
+            }
+        }
+
+        body.light .tech-background {
+            background-color: #f3f4f6; /* Light background */
+            background-image: linear-gradient(0deg, rgba(252, 211, 77, 0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(252, 211, 77, 0.1) 1px, transparent 1px);
+            opacity: 0.5;
+        }
+
+        /* Custom scrollbar styles */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: #111827; /* bg-gray-900 */
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #4B5563; /* bg-gray-600 */
+            border-radius: 4px;
+        }
+        body.light {
+            background-color: #F3F4F6; /* bg-gray-100 */
+            color: #1F2937; /* text-gray-900 */
+        }
+        body.light .bg-gray-900,
+        body.light .bg-gray-800 {
+            background-color: #E5E7EB; /* bg-gray-200 */
+        }
+        body.light .text-white {
+            color: #1F2937; /* text-gray-900 */
+        }
+        body.light .hover\:text-yellow-400:hover {
+            color: #FCD34D; /* text-yellow-400 */
+        }
+        body.light .bg-yellow-400 {
+            background-color: #FCD34D; /* bg-yellow-400 */
+        }
+        body.light .text-gray-300 {
+            color: #4B5563; /* text-gray-600 */
+        }
+        body.light .text-gray-400 {
+            color: #6B7280; /* text-gray-500 */
+        }
+        body.light .bg-gray-700 {
+            background-color: #D1D5DB; /* bg-gray-300 */
+        }
+        body.light .contact-card, body.light .project-card {
+            background-color: #F3F4F6; /* bg-gray-100 */
+            border: 1px solid #D1D5DB; /* border-gray-300 */
+        }
+        body.light .contact-card input, body.light .contact-card textarea {
+            background-color: #FFFFFF; /* bg-white */
+            color: #1F2937; /* text-gray-900 */
+        }
+        body.light .contact-card input::placeholder, body.light .contact-card textarea::placeholder {
+            color: #9CA3AF; /* text-gray-400 */
+        }
+        .contact-card, .project-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .contact-card:hover, .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .scroll-to-top {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #FCD34D; /* yellow-400 */
+            color: #1F2937; /* black */
+            padding: 0.75rem 1rem;
+            border-radius: 9999px; /* full rounded */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            z-index: 50;
+        }
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+        }
+        .dark-mode-toggle {
+            cursor: pointer;
+            width: 2.5rem;
+            height: 1.25rem;
+            background-color: #4B5563;
+            border-radius: 9999px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+        .dark-mode-toggle::before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+        body.light .dark-mode-toggle::before {
+            transform: translateX(1.25rem);
+            background-color: #1F2937;
+        }
+
+        /* Modal for image zoom */
+        .image-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 100;
+        }
+        .image-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 0.5rem;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #FCD34D;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .image-modal-close:hover {
+            transform: rotate(90deg);
+        }
+        
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <div class="tech-background"></div>
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center px-6 py-4 bg-gray-800 fixed w-full z-10 rounded-b-lg shadow-lg">
+        <div class="text-xl font-bold">Shriraj Nevase</div>
+        <ul class="flex space-x-6 items-center">
+            <li><a href="#about" class="hover:text-yellow-400">About</a></li>
+            <li><a href="#skills" class="hover:text-yellow-400">Skills</a></li>
+            <li><a href="#projects" class="hover:text-yellow-400">Projects</a></li>
+            <li><a href="#certificates" class="hover:text-yellow-400">Certificates</a></li>
+            <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>
+            <li><a href="#resume" class="hover:text-yellow-400">Resume</a></li>
+            <li class="dark-mode-toggle"></li>
+            
+        </ul>
+    </nav>
+  
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-16" id="hero">
+        <img src="Shriraj.jpg" alt="Your Name's photo" 
+             class="w-48 h-48 rounded-full object-cover mb-8 border-4 border-yellow-400 shadow-lg 
+                    transform hover:scale-105 transition duration-300">
+        <h1 class="text-6xl md:text-8xl font-extrabold mb-4 animate-pulse">Hi, I’m Shriraj Nevase</h1>
+        <p class="text-xl md:text-2xl text-gray-300">Frontend Developer | Designer | Problem Solver</p>
+        <a href="#projects" class="mt-8 px-8 py-4 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition transform hover:scale-105 shadow-md">
+            View My Work
+        </a>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="max-w-4xl mx-auto py-20 px-6">
+        <h2 class="text-4xl font-bold mb-6 text-center">About Me</h2>
+        <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+            <p class="text-gray-300 leading-relaxed text-lg">
+                Hi, I’m Shriraj Nevase, a passionate beginner web developer and a second-year engineering student specializing in Artificial Intelligence and Data Science.
+I have hands-on experience with C, C++, Python, HTML, CSS, and JavaScript, and I enjoy building creative, functional, and user-friendly websites.
+I have also completed Data Analytics courses, gaining skills in analyzing, interpreting, and visualizing data to derive meaningful insights.
+Currently, I’m expanding my skills in web development while exploring the exciting world of AI and data-driven technologies.
+I’m eager to learn, innovate, and work on projects that solve real-world problems.
+            </p>
+        </div>
+    </section>
+      
+
+
+   <section id="resume" class="max-w-6xl mx-auto py-20 px-6 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+      <h2 class="text-4xl font-bold mb-12 text-center text-cyan-400">My Resume</h2>
+
+      <div class="text-center mb-12">
+        <a href="Shriraj_Nevase_ATS_Resume (1).pdf" download="Shriraj_Nevase_ATS_Resume (1).pdf"
+           class="inline-flex items-center px-6 py-3 bg-cyan-500 text-white font-semibold rounded-full hover:bg-cyan-400 transition transform hover:scale-105 shadow-lg">
+          <i class="fas fa-download mr-2"></i> Download Resume
+        </a>
+      </div>
+    </section>
+
+    <div class="relative border-l-4 border-cyan-400 pl-8 space-y-10">
+          <div class="relative border-l-4 border-yellow-400 pl-8 space-y-10">
+      <!-- Education -->
+      <div>
+        <h3 class="text-2xl font-semibold text-yellow-400">Education</h3>
+        <div class="mt-4">
+          <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+            <h4 class="text-xl font-bold">B.E. Artificial Intelligence & Data Science</h4>
+            <p class="text-gray-300">Jayawantrao Sawant College of Engineering, Pune — 2024–2028</p>
+            <p  class="text-gray-300">Second-year B.E. student specializing in Artificial Intelligence & Data Science at JSPM’s
+ JSCOE, Pune. Enthusiastic about software development and data analytics, with hands-on
+ experience in web development and AI projects. Skilled in programming, problem-solving,
+ and teamwork, with multiple certifications in C++, Cybersecurity, Web Development, and
+ Data Science</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div>
+        <h3 class="text-2xl font-semibold text-yellow-400">Experience</h3>
+        <div class="mt-4">
+          <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+            <h4 class="text-xl font-bold">Frontend Developer</h4>
+            <p class="text-gray-300">Worked on multiple projects using HTML, CSS, JavaScript, React, and Tailwind CSS.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div>
+        <h3 class="text-2xl font-semibold text-yellow-400">Skills</h3>
+        <div class="grid md:grid-cols-2 gap-6 mt-4">
+          <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+            <h4 class="font-semibold">Programming</h4>
+            <p class="text-gray-300">Python, C, C++, JavaScript</p>
+          </div>
+          <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+            <h4 class="font-semibold">Web Development</h4>
+            <p class="text-gray-300">HTML5, CSS3, React, Tailwind CSS</p>
+          </div>
+          <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+            <h4 class="font-semibold">Data</h4>
+            <p class="text-gray-300">SQL, Pandas, NumPy</p>
+          </div>
+          <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+            <h4 class="font-semibold">Tools</h4>
+            <p class="text-gray-300">Git, GitHub, VS Code</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- Certificates -->
+    <section id="certificates" class="max-w-6xl mx-auto py-20 px-6">
+        <h2 class="text-4xl font-bold mb-10 text-center">Certificates</h2>
+        <div id="certificates-container" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Certificate cards will be injected here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="max-w-6xl mx-auto py-20 px-6">
+        <h2 class="text-4xl font-bold mb-10 text-center">Projects</h2>
+        <div id="projects-container" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Project cards will be injected here by JavaScript -->
+        </div>
+    </section>
+
+   
+   <!-- Contact -->
+<section id="contact" class="max-w-5xl mx-auto py-20 px-6">
+  <h2 class="text-4xl font-bold mb-6 text-center">Contact Me</h2>
+  <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+    Let’s collaborate! Reach out via email, connect on LinkedIn, or drop a message using the form below.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-10 items-start">
+    
+    <!-- Contact Info -->
+    <div class="space-y-6">
+      <div class="flex items-center gap-4 bg-gray-800 p-5 rounded-lg shadow-md hover:-translate-y-1 hover:shadow-xl transition">
+        <i class="fas fa-envelope text-yellow-400 text-2xl"></i>
+        <div>
+          <h4 class="font-semibold">Email</h4>
+          <a href="mailto:shrirajnevase@outlook.com" class="text-gray-400 hover:text-yellow-400">
+            shriraj.nevase@outlook.com
+          </a>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 bg-gray-800 p-5 rounded-lg shadow-md hover:-translate-y-1 hover:shadow-xl transition">
+        <i class="fab fa-linkedin text-yellow-400 text-2xl"></i>
+        <div>
+          <h4 class="font-semibold">LinkedIn</h4>
+          <a href="https://www.linkedin.com/in/shriraj-nevase-462a0b375/" target="_blank" class="text-gray-400 hover:text-yellow-400">
+            linkedin.com/in/shriraj-nevase
+          </a>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 bg-gray-800 p-5 rounded-lg shadow-md hover:-translate-y-1 hover:shadow-xl transition">
+        <i class="fab fa-github text-yellow-400 text-2xl"></i>
+        <div>
+          <h4 class="font-semibold">GitHub</h4>
+          <a href="https://github.com/shriraj25" target="_blank" class="text-gray-400 hover:text-yellow-400">
+            github.com/shriraj-nevase
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <form class="bg-gray-800 p-8 rounded-lg shadow-lg space-y-6 contact-card">
+      <div>
+        <label for="name" class="block text-sm font-medium mb-1">Your Name</label>
+        <input type="text" id="name" name="name" 
+          class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400" 
+          placeholder="John Doe">
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium mb-1">Your Email</label>
+        <input type="email" id="email" name="email" 
+          class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400" 
+          placeholder="you@example.com">
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium mb-1">Message</label>
+        <textarea id="message" name="message" rows="4" 
+          class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400" 
+          placeholder="Your message..."></textarea>
+      </div>
+      <button type="submit" 
+        class="w-full bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-300 transition transform hover:scale-105 shadow-md">
+        <i class="fas fa-paper-plane mr-2"></i> Send Message
+      </button>
+    </form>
+
+  </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-20">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="flex flex-col items-center space-y-4 md:space-y-0 md:flex-row md:justify-between">
+                <p class="text-gray-400 text-sm">© 2025 Shriraj Nevase. All rights reserved.</p>
+                <div class="flex space-x-6 items-center">
+                    <a href="https://github.com/shriraj-ne" target="_blank" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/shriraj-nevase-462a0b375/" target="_blank" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                        <i class="fab fa-linkedin fa-lg"></i>
+                    </a>
+                    <a href="mailto:shriraj.nevase@email.com" class="text-gray-400 hover:text-yellow-400 transition-colors">
+                        <i class="fas fa-envelope fa-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button id="scrollToTopBtn" class="scroll-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+    
+    
+    <!-- Image Modal -->
+    <div id="image-modal-overlay" class="image-modal-overlay">
+        <span id="image-modal-close" class="image-modal-close">
+            <i class="fas fa-times-circle"></i>
+        </span>
+        <div class="image-modal-content">
+            <img id="image-modal-img" src="" alt="Zoomed image">
+        </div>
+    </div>
+
+
+    <script>
+        // Data for projects - you can add more projects here
+        const projects = [
+            {
+                title: "Sentimental scope ",
+                description: "A stylish, minimal Website that capturesimage or text and and give your mood and suggest it",
+                image: "images/Screenshot 2025-08-18 115410.png"
+            },
+            {
+                title: "College helpdesk bot",
+                description: "This is the front-end code for a modern, responsive college helpdesk chatbot, built with HTML, CSS, and JavaScript to create a user-friendly and interactive experience.",
+                image: "image.png"
+            },
+            {
+                title: "Movie Ticket Booking",
+                description: "This project is designed to create a seamless and user-friendly platform for browsing movie showtimes, selecting seats, and securely purchasing tickets online.",
+                image: "image copy.png"
+            },
+            {
+                title: "Advance BMI Calculator",
+                description: "This project is a graphical BMI calculator, built with Python's Tkinter, that computes a user's Body Mass Index and visualizes the result on a color-coded health gauge.",
+                image: "image copy 2.png"
+            },
+            {
+                title: "Smart Waste sorting App",
+                description: "This app uses your phone's camera and AI to help you sort waste correctly and earn rewards for your eco-friendly actions.",
+                image: "image copy 3.png"
+            }
+           
+        ];
+
+        // Data for certificates - you can add more certificates here
+        const certificates = [
+            {
+                title: "Introduction to Mongo DB",
+                issuer: "Mongo DB",
+                date: "January 2024",
+                image: "images/mongo db_page-0001.jpg",
+                link: "#"
+            },
+            {
+                title: "Data Science and Analytics",
+                issuer: "HP Foundation",
+                date: "March 2024",
+                image: "images/Hp certificate_page-0001.jpg",
+                link: "#"
+            },
+            {
+                title: "Front-End Web Development with React",
+                issuer: "Coursera",
+                date: "April 2024",
+                image: "images/Coursera T07KU5OPN3BY_page-0001.jpg",
+                link: "#"
+            },
+            {
+                title: "c++ Esentials",
+                issuer: "Cisco Networking Academy",
+                date: "April 2024",
+                image: "images/C - _Essentials_1_certificate_shrirajnevase-gmail-com_1b546226-4555-45c2-ba5b-5670344774c6 (1)_page-0001.jpg",
+                link: "#"
+            },
+            {
+                title: "Cyber security Assesment",
+                issuer: "Cisco Networking Academy",
+                date: "April 2024",
+                image: "images/ACFrOgDDymii_CIFtJ29U_5AaULbBqxwscvBb2rey9X_j-n9NSEXN72Sfq9oR5ZgcVCoD5LRnTZgSLOtFsc0gHLAiKP_qaLOc4_bWqjDZfzir1aLXmJdlhSkxR9A9vDjFnAVvSBBwI7d0R9Z7fOXeyfircxLTDnd7zIb1Clr0A==_page-0.jpg",
+                link: "#"
+            },
+        ];
+
+        // Function to create a project card
+        function createProjectCard(project) {
+            const card = document.createElement('div');
+            card.className = "bg-gray-800 p-4 rounded-lg hover:shadow-xl transition transform hover:-translate-y-1 project-card";
+            card.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" class="rounded mb-4 w-full h-48 object-cover cursor-pointer project-image">
+                <h3 class="text-xl font-semibold mb-2">${project.title}</h3>
+                <p class="text-gray-400">${project.description}</p>
+            `;
+            return card;
+        }
+
+        // Function to create a certificate card
+        function createCertificateCard(certificate) {
+            const card = document.createElement('a');
+            card.href = certificate.link;
+            card.target = "_blank"; // Open in new tab
+            card.className = "bg-gray-800 p-4 rounded-lg hover:shadow-xl transition transform hover:-translate-y-1 project-card block";
+            card.innerHTML = `
+                <img src="${certificate.image}" alt="${certificate.title} certificate" class="rounded mb-4 w-full h-48 object-cover cursor-pointer certificate-image">
+                <h3 class="text-xl font-semibold">${certificate.title}</h3>
+                <p class="text-gray-400 mt-1">Issued by: ${certificate.issuer}</p>
+                <p class="text-gray-500 text-sm mt-1">Date: ${certificate.date}</p>
+            `;
+            return card;
+        }
+
+        // Function to render all projects
+        function renderProjects() {
+            const projectsContainer = document.getElementById('projects-container');
+            projects.forEach(project => {
+                projectsContainer.appendChild(createProjectCard(project));
+            });
+        }
+
+        // Function to render all certificates
+        function renderCertificates() {
+            const certificatesContainer = document.getElementById('certificates-container');
+            certificates.forEach(certificate => {
+                certificatesContainer.appendChild(createCertificateCard(certificate));
+            });
+        }
+
+        // Dark mode toggle functionality
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        const body = document.body;
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+            body.classList.add('light');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light')) {
+                body.classList.remove('light');
+                localStorage.setItem('theme', '');
+            } else {
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.style.display = 'block';
+                scrollToTopBtn.style.opacity = '1';
+                scrollToTopBtn.style.transform = 'translateY(0)';
+            } else {
+                scrollToTopBtn.style.opacity = '0';
+                scrollToTopBtn.style.transform = 'translateY(20px)';
+                // Using a timeout to hide the button after the transition
+                setTimeout(() => {
+                    if (window.scrollY <= 300) {
+                        scrollToTopBtn.style.display = 'none';
+                    }
+                }, 300);
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Image Modal functionality
+        const modalOverlay = document.getElementById('image-modal-overlay');
+        const modalImage = document.getElementById('image-modal-img');
+        const modalCloseBtn = document.getElementById('image-modal-close');
+
+        // Function to open the modal
+        function openImageModal(imageSrc) {
+            modalImage.src = imageSrc;
+            modalOverlay.classList.add('active');
+        }
+
+        // Function to close the modal
+        function closeImageModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        // Add click listeners to all image cards
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('project-image') || event.target.classList.contains('certificate-image')) {
+                openImageModal(event.target.src);
+            }
+        });
+
+        // Add a click listener to the close button
+        modalCloseBtn.addEventListener('click', closeImageModal);
+
+        // Close modal when clicking outside the image
+        modalOverlay.addEventListener('click', (event) => {
+            if (event.target === modalOverlay) {
+                closeImageModal();
+            }
+        });
+
+        // Initialize on page load
+        window.onload = () => {
+            renderProjects();
+            renderCertificates();
+        };
+    </script>
+</body>
+</html>

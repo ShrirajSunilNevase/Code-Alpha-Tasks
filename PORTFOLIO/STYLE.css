@@ -1,0 +1,330 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    line-height: 1.6;
+}
+/* Styling for the resume section container */
+#resume {
+    text-align: center;
+    padding: 5rem 1.5rem;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+.resume-content {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#resume h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+#resume p {
+    color: #D1D5DB; /* text-gray-300 */
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.resume-download-btn {
+    display: inline-block;
+    background-color: #FCD34D; /* bg-yellow-400 */
+    color: #111827; /* black */
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-radius: 9999px; /* rounded-full */
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.resume-download-btn:hover {
+    background-color: #FBBF24; /* a darker yellow */
+    transform: scale(1.05);
+}
+
+.resume-download-btn .fas {
+    margin-right: 0.5rem;
+}
+
+/* Light mode styles for resume section */
+body.light #resume p {
+     color: #4B5563; /* text-gray-600 */
+}
+
+body.light .resume-content {
+     background-color: #E5E7EB; /* bg-gray-200 */
+}
+/* HEADER - More Attractive */
+header.site-header {
+    background: linear-gradient(120deg, #6c63ff, #5edfff);
+    color: white;
+    text-align: center;
+    padding: 70px 20px 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background wave effect */
+header.site-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 150px;
+    background: url('https://svgshare.com/i/15Qh.svg') repeat-x;
+    background-size: cover;
+    animation: waveAnim 8s linear infinite;
+    opacity: 0.3;
+}
+@keyframes waveAnim {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 2px 3px 10px rgba(0,0,0,0.2);
+}
+
+header p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    opacity: 0.95;
+    font-weight: 400;
+}
+/* Styling for the resume section container */
+#resume {
+    text-align: center;
+    padding: 5rem 1.5rem; /* Equivalent to py-20 px-6 */
+    width: 100%;
+    background-color: #111827; /* Dark background */
+    color: #F3F4F6; /* Light text */
+    font-family: 'Inter', sans-serif; /* Recommended font */
+}
+
+/* Inner content wrapper for max-width and centering */
+.resume-content {
+    max-width: 42rem; /* Equivalent to max-w-2xl */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Styling for the main heading (h2) */
+#resume h2 {
+    font-size: 2.25rem; /* Equivalent to text-4xl */
+    font-weight: 700;   /* Equivalent to font-bold */
+    margin-bottom: 1.5rem; /* Equivalent to mb-6 */
+}
+
+/* Styling for the descriptive paragraph (p) */
+#resume p {
+    color: #D1D5DB; /* Equivalent to text-gray-300 */
+    margin-bottom: 2rem; /* Equivalent to mb-8 */
+    line-height: 1.6;
+}
+
+/* Styling for the download button */
+.resume-download-btn {
+    display: inline-block;
+    background-color: #FCD34D; /* Equivalent to bg-yellow-400 */
+    color: #111827; /* Black text */
+    font-weight: 600; /* Equivalent to font-semibold */
+    padding: 1rem 2rem; /* Equivalent to px-8 py-4 */
+    border-radius: 9999px; /* Equivalent to rounded-full */
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover effect for the download button */
+.resume-download-btn:hover {
+    background-color: #FBBF24; /* Equivalent to hover:bg-yellow-300 */
+    transform: scale(1.05); /* Equivalent to hover:scale-105 */
+}
+
+/* Styling for the download icon inside the button */
+.resume-download-btn .fas {
+    margin-right: 0.5rem; /* Equivalent to mr-2 */
+}
+
+/* NAVIGATION MENU */
+header nav {
+    margin-top: 25px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 14px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 25px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+header nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255,255,255,0.3);
+    transform: scale(1.05);
+}
+
+/* Make header responsive */
+@media(max-width: 768px) {
+    header h1 {
+        font-size: 2.3rem;
+    }
+    header p {
+        font-size: 1.1rem;
+    }
+    header nav a {
+        display: inline-block;
+        margin: 6px 8px;
+    }
+}
+
+header.site-header {
+    background: linear-gradient(120deg, #6c63ff, #5edfff);
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+
+/* About Section */
+.about {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.about img {
+    width: 150px;
+    border-radius: 50%;
+    border: 4px solid #6c63ff;
+}
+
+.about h2 {
+    margin-top: 0;
+}
+
+/* Skills Section */
+.skills {
+    background: #f4f9ff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.skills ul {
+    list-style: none;
+    padding: 0;
+}
+
+.skills li {
+    background: #e0e8ff;
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin: 5px;
+    transition: background 0.3s;
+}
+
+.skills li:hover {
+    background: #c4d4ff;
+}
+
+/* Projects Section */
+.projects {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.project {
+    background: white;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.project img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Resume Section */
+.resume {
+    background: #f4f4f4;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.resume a {
+    background: #6c63ff;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background 0.3s;
+}
+
+.resume a:hover {
+    background: #5a55e0;
+}
+
+/* Contact */
+.contact {
+    max-width: 900px;
+    padding: 40px 20px;
+    margin: auto;
+    text-align: center;
+}
+
+.contact a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.contact a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media(max-width: 768px) {
+    .about {
+        flex-direction: column;
+        text-align: center;
+    }
+}
