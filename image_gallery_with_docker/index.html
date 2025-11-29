@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery - Professional Collection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">Image Gallery</h1>
+            <p class="header__subtitle">Your Professional Photo Collection</p>
+            <div class="header__stats">
+                <span class="stat-item">
+                    <strong id="total-images">0</strong> Images
+                </span>
+                <span class="stat-item">
+                    <strong id="total-tags">0</strong> Tags
+                </span>
+            </div>
+        </div>
+    </header>
+
+    
+    <main class="main-content">
+        <div class="container">
+            
+            <section class="upload-section">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Upload Images</h3>
+                    <p>Drag &amp; drop images here or click to browse</p>
+                    <input type="file" id="file-input" accept="image/*" multiple hidden>
+                    <button class="btn btn--primary" onclick="document.getElementById('file-input').click()">Choose Files</button>
+                </div>
+                <div class="upload-status" id="upload-status"></div>
+            </section>
+
+        
+            <section class="filter-section">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search by title or description...">
+                </div>
+                
+                <div class="tag-filters" id="tag-filters">
+                    
+                </div>
+                
+                <div class="filter-info" id="filter-info">
+                    <span id="showing-count">0</span> images shown
+                </div>
+            </section>
+
+            
+            <section class="gallery-section">
+                <div class="gallery-grid" id="gallery-grid">
+                    
+                </div>
+                <div class="empty-state" id="empty-state">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    <h3>No images found</h3>
+                    <p>Try adjusting your search or filters</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    
+    <div class="modal" id="modal">
+        <button class="modal__close" id="modal-close" aria-label="Close modal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        
+        <button class="modal__nav modal__nav--prev" id="modal-prev" aria-label="Previous image">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        
+        <button class="modal__nav modal__nav--next" id="modal-next" aria-label="Next image">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+        
+        <div class="modal__content">
+            <img id="modal-image" src="" alt="" class="modal__image">
+            <div class="modal__info">
+                <div class="modal__counter" id="modal-counter">1 / 1</div>
+                <h2 class="modal__title" id="modal-title">Image Title</h2>
+                <p class="modal__description" id="modal-description">Image description</p>
+                <div class="modal__meta">
+                    <span class="modal__date" id="modal-date">Date</span>
+                    <div class="modal__tags" id="modal-tags"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
