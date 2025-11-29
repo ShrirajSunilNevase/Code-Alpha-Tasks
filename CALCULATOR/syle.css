@@ -1,0 +1,87 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+}
+
+.calculator {
+    width: 320px;
+    background-color: #333;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 20px;
+}
+
+.display {
+    width: 100%;
+    background-color: #222;
+    color: white;
+    font-size: 2.5rem;
+    text-align: right;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr); /* We have 5 rows now */
+    gap: 10px;
+}
+
+button {
+    padding: 20px;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #555;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #666;
+}
+
+.operator {
+    background-color: #f0ad4e;
+}
+
+.operator:hover {
+    background-color: #ec9a29;
+}
+
+.clear {
+    background-color: #d9534f;
+    grid-column: span 1; /* Resetting span from previous design */
+}
+
+.clear:hover {
+    background-color: #c9302c;
+}
+
+.equals {
+    background-color: #5cb85c;
+    grid-row: span 2; /* Make button span 2 rows */
+}
+
+.equals:hover {
+    background-color: #4cae4c;
+}
+
+/* Special styling for the plus button to span 2 rows */
+button[data-value='+'] {
+    grid-row: span 2;
+}
+
+/* Make the zero button span 2 columns */
+.zero {
+    grid-column: span 2;
+}
